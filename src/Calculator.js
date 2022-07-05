@@ -14,33 +14,34 @@ export class Calculator extends React.Component {
           type="text"
           id="calcOutput"
           name="calcOutput"
+          data-testid="calcOutput"
           ref={this.myRef}
           readOnly
         ></input>
         <tbody>
-          {
-            Array.from(Array(3), (e, i) => {
-              return(
+          {Array.from(Array(3), (e, i) => {
+            return (
               <tr>
-                {
-                  Array.from(Array(3), (e, j) => {
-                    return (
-                      <td>
-                        <CalculatorButton
-                          value={7 - i * 3 + j}
-                          inp={this.myRef}
-                        />
-                      </td>
-                    );
-                  })
-                }
+                {Array.from(Array(3), (e, j) => {
+                  return (
+                    <td>
+                      <CalculatorButton
+                        value={7 - i * 3 + j}
+                        inp={this.myRef}
+                      />
+                    </td>
+                  );
+                })}
               </tr>
-              )
-            })
-          }
+            );
+          })}
           <tr>
-            <td><CalculatorButton value={0} inp={this.myRef} /></td>
-            <td><CalculatorButton value={"."} inp={this.myRef} /></td>
+            <td>
+              <CalculatorButton value={0} inp={this.myRef} />
+            </td>
+            <td>
+              <CalculatorButton value={"."} inp={this.myRef} />
+            </td>
           </tr>
         </tbody>
       </div>
