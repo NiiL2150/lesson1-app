@@ -1,26 +1,31 @@
-import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 
-export class CalculatorButton extends React.Component {
-  static defaultProps = {
-    value: 0,
-    inp: null
-  };
+function CalculatorButton(props) {
+  const [value = 0] = useState(props.value);
+  const [inp = null] = useState(props.inp);
+  const [addDigit = null] = useState(props.addDigit);
+  const [check = null] = useState(props.check);
 
-  static propTypes = {
-    value: PropTypes.any,
-    inp: PropTypes.object
-  };
-
-  render() {
-    return (
-      <button
-        onClick={() => {
-          this.props.inp.current.value += this.props.value;
-        }}
-      >
-        {this.props.value}
-      </button>
-    );
+  function changeInput(){
+    if(check!=null){
+      if(check(inp.current?.value)){
+        return;
+      }
+    }
+    addDigit(value);
   }
+
+  return (
+    <button onClick={changeInput}>{value}</button>
+  );
 }
+
+CalculatorButton.propTypes = {
+  value: PropTypes.any,
+  inp: PropTypes.object,
+  check: PropTypes.any,
+  addDigit: PropTypes.func,
+};
+
+export default CalculatorButton;
